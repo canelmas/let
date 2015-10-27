@@ -34,14 +34,6 @@ dependencies {
 group = GROUP
 version = VERSION_NAME
 
-install {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://localhost:8081/nexus/content/repositories/snapshots")
-        }
-    }
-}
-
 android {
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
