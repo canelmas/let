@@ -1,2 +1,2 @@
-# runtime-permissions
-AOP / annotation based simple API to handle android runtime permissions
+# Let
+Annotation based simple API flavored with AOP to handle Android runtime permissions
