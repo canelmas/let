@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Let Sample App</string>
+
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" > Hello blank fragment</string>
+    <string name="title_activity_fragment">FragmentActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!--
+        Rationales
+     -->
+    <string name="rationale_location">We need your permission to locate you in order to display you nearest offers!</string>
+    <string name="rationale_">In order to capture beautiful photos, we need you to grant permission</string>
+</resources>

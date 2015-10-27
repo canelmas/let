@@ -1,0 +1,6 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+<!-- From: file:/Users/can/Projects/m-permission/Let/let-sample/src/main/res/layout/activity_fragment.xml -->
