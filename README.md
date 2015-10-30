@@ -4,7 +4,7 @@ Let
 Annotation based simple API flavored with AOP to handle new Android Runtime Permission model
 
 
-Simply Add`@AskPermission` to your methods where you'll need the permission to be granted at runtime 
+Simply Add`@AskPermission` to your methods where you'll need permissions to be granted at runtime 
 in order to execute method's body. Let will handle the whole flow for you and inform when the 
 permissions asked are denied (with or without 'Never Ask Again') or whether the rationales should be 
 shown to the user.
@@ -32,6 +32,36 @@ private void makePhoneCall() {
     startActivity(intent);
 }
 ```
+
+Override the `onRequestPermissionsResult` in your Activity or Fragment and let Let handle the rest.
+
+```
+@Override
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    Let.handle(requestCode, permissions, grantResults);
+}
+```
+
+To get notified about denied permissions and rationales to be shown, make sure the Activity or Fragment 
+implements `RuntimePermissionListener`
+
+```
+public class SampleActivity extends AppCompatActivity implements RuntimePermissionListener {
+....
+@Override
+public void onShowPermissionRationale(List<String> permissions, final RuntimePermissionRequest request) {
+    // show permission rationales in a dialog. Retry the permission request when user confirms
+    ....
+}   
+
+@Override
+public void onPermissionDenied(List<DeniedPermissionRequest> results) {
+    // Update UI and prompt a dialog to tel user to go to the app settings page in order to
+    // grant again the permission denied  with 'Never Ask Again'
+}
+```
+
+
 
 
 Add it to your project today!
