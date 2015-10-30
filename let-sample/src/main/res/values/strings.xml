@@ -25,8 +25,30 @@
     <string name="hello_world">Hello world!</string>
 
     <!--
+        Contacts
+    -->
+    <string name="contacts_string">Total number of contacts: %1$,d\nFirst contact:<b>%2$s</b></string>
+    <string name="contacts_none">No contacts stored on device.</string>
+    <string name="contacts_empty">Contacts not loaded.</string>
+    <string name="add_contact">Add a contact</string>
+    <string name="show_contact">Show first contact</string>
+
+    <string name="contacts_intro">This fragment demonstrates access to the contact database on the device.\n
+            Clicking \"Add a contact\" adds a new contact named "__DUMMY ENTRY" directly into the database.\n
+    Clicking \"Show first contact\" accesses the contact database to display the name of the first contact.</string>
+
+    <string name="show_contacts">Show and add contacts</string>
+
+    <string name="permission_available_contacts">Contacts Permissions have been granted. Contacts screen can now be opened.</string>
+    <string name="permissions_not_granted">Permissions were not granted.</string>
+
+    <!--
         Rationales
      -->
-    <string name="rationale_location">We need your permission to locate you in order to display you nearest offers!</string>
-    <string name="rationale_">In order to capture beautiful photos, we need you to grant permission</string>
+    <string name="rationale_contacts">Contacts permissions are needed to demonstrate access.</string>
+    <string name="rationale_location">We need to locate you in order to offer you nearby offers!</string>
+    <string name="rationale_camera">We need this permission...</string>
+    <string name="rationale_storage">We need this permission...</string>
+    <string name="rationale_storage_general">We need this permission...</string>
+
 </resources>

@@ -84,8 +84,9 @@ public void onShowPermissionRationale(List<String> permissions, final RuntimePer
 
 @Override
 public void onPermissionDenied(List<DeniedPermissionRequest> results) {
-    // Update UI and prompt a dialog to tell user to go to the app settings page in order to
-    // grant again the permission denied with 'Never Ask Again'
+    // Update UI and prompt a dialog to tell user to go to the app settings screen in order to
+    // grant again the permission denied with 'Never Ask Again' 
+    ...
 }
 ```
 
@@ -105,11 +106,6 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'let'
 ```
-
-Notes
-====
-
-- Make sure that your Activity or Fragment implements `RuntimePermissionListener`
 
 License
 ====

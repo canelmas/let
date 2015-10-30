@@ -39,6 +39,7 @@ import com.canelmas.let.RuntimePermissionRequest;
 import java.util.List;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.CALL_PHONE;
 
 public class SampleActivity extends AppCompatActivity implements RuntimePermissionListener {
 
@@ -48,11 +49,11 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
 
         setContentView(R.layout.activity_sample);
 
-        // Call
-        findViewById(R.id.btn_call).setOnClickListener(new View.OnClickListener() {
+        // Contacts
+        findViewById(R.id.btn_contacts).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makePhoneCall();
+                showContacts();
             }
         });
 
@@ -72,28 +73,9 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
             }
         });
 
-        findViewById(R.id.btn_both).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                v.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        makePhoneCall();
-                    }
-                }, 2000);
-
-                v.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        accessLocationAndDoSomething();
-                    }
-                }, 2000);
-
-            }
-        });
-
     }
+
+
 
     @AskPermission(ACCESS_FINE_LOCATION)
     private void accessLocationAndDoSomething() {
@@ -101,17 +83,17 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
     }
 
     @AskPermission({
-            Manifest.permission.CALL_PHONE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.SEND_SMS
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_CONTACTS
     })
-    private void makePhoneCall() {
+    private void showContacts() {
+        startActivity(new Intent(this, ContactsActivity.class));
+    }
 
-        Toast.makeText(SampleActivity.this, "Calling..", Toast.LENGTH_SHORT).show();
-
+    @AskPermission(CALL_PHONE)
+    private void call(){
         final Intent intent = new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:00123124234234"));
         startActivity(intent);
-
     }
 
     @Override
@@ -122,16 +104,11 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
     @Override
     public void onShowPermissionRationale(List<String> permissions, final RuntimePermissionRequest request) {
 
-        /**
-         * this part may change app to app, but in the end
-         * actual call should be made again
-         *
-         */
+        //  tell user why you need those permissions
         final StringBuilder sb = new StringBuilder();
 
         for (String permission : permissions) {
-
-            sb.append(permission + " is needed because.");
+            sb.append(getRationale(permission));
             sb.append("\n");
         }
 
@@ -154,6 +131,16 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
 
         // TODO: 20/10/15 what happens if request not retried
 
+    }
+
+    private String getRationale(String permission) {
+        if (permission.equals(Manifest.permission.READ_CONTACTS) || permission.equals(Manifest.permission.WRITE_CONTACTS)) {
+            return getString(R.string.rationale_contacts);
+        } else if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            return getString(R.string.rationale_location);
+        } else {
+            return getString(R.string.rationale_storage_general);
+        }
     }
 
     @Override
