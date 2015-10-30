@@ -1,7 +1,28 @@
 Let
 ====
 
-Annotation based simple API flavored with AOP to handle new Android Runtime Permission model
+Annotation based simple API flavoured with AOP to handle new Android runtime permission model.
+
+If you check [Google's Samples] (https://github.com/googlesamples/android-RuntimePermissions/blob/master/Application/src/main/java/com/example/android/system/runtimepermissions/MainActivity.java) 
+about the new permission model, you'll see a lot of boiler plate code just to show a camera or display 
+contact details.  
+
+Let will minimize the boiler plate code you have to write for requesting permissions and handling upon the new model
+and keep your code readable.  
+
+Well, this is obviously not a perfect UX. So if you want to handle this rationale step by yourself,
+pause for a while, wait for a user confirmation and try again with few lines of code, Let is what
+you're looking for.
+
+Another reason is that you might want to distinguish Not-Granted state from 'Never Ask Again' state if
+you want to update your UI or want to dispatch user to the Application Settings page where only the permission
+can be enabled again.
+
+If you want to concentrate on more important things, let Let handle this flows with masking the whole 
+boilerplate code.
+  
+Usage
+====
 
 Simply Add`@AskPermission` to your methods that require permissions to be granted at runtime.
  
@@ -27,11 +48,10 @@ Ask for multiple permissions,
 
 ```java
 @AskPermission({
-            Manifest.permission.CALL_PHONE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.SEND_SMS
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.WRITE_CONTACTS          
 })
-private void makePhoneCall() {
+private void showContacts() {
 
     Toast.makeText(SampleActivity.this, "Calling..", Toast.LENGTH_SHORT).show();
 
@@ -86,29 +106,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'let'
 ```
 
-Why?
+Notes
 ====
 
-If you check the Google's Samples about this new permission model, you'll see the second permission request is
-triggered at the same time the rationale is shown, without waiting user i.e. simple toast message is
-shown and then the permission request is retried.
-
-Well, this is obviously not a perfect UX. So if you want to handle this rationale step by yourself,
-pause for a while, wait for a user confirmation and try again with few lines of code, Let is what
-you're looking for.
-
-Another reason is that you might want to distinguish Not-Granted state from 'Never Ask Again' state if
-you want to update your UI or want to dispatch user to the Application Settings page where only the permission
-can be enabled again.
-
-If you want to concentrate on more important things, let Let handle this flows with masking the whole 
-boilerplate code.
-  
+- Make sure that your Activity or Fragment implements `RuntimePermissionListener`
 
 License
---------
+====
 
-    Copyright 2015 Jake Wharton
+    Copyright 2015 Can Elmas
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
