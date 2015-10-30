@@ -13,6 +13,7 @@ private void getUserLocationAndDoSomething() {
         "Now that I have the permission, I can get your location!", 
         Toast.LENGTH_SHORT
     ).show();
+    ...
 }
 ``` 
 
@@ -22,7 +23,7 @@ are granted by the user at runtime.
 Let will tell whether the permissions asked are denied (with or without 'Never Ask Again' checked) or 
 whether the rationales should be shown to the user before requesting them.
 
-Ask for multiple permissions 
+Ask for multiple permissions, 
 
 ```java
 @AskPermission({
