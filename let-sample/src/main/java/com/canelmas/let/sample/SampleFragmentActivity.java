@@ -16,22 +16,22 @@
 
 package com.canelmas.let.sample;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.canelmas.let.Let;
 
-public class SecondActivity extends AppCompatActivity {
+public class SampleFragmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
 
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
 
         ft.add(R.id.frag_container, new SampleFragment());
         ft.commit();
