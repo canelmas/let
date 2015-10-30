@@ -22,8 +22,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.canelmas.let.Let;
-
 public class SampleFragmentActivity extends AppCompatActivity {
 
     @Override
@@ -59,8 +57,4 @@ public class SampleFragmentActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Let.handle(requestCode, permissions, grantResults);
-    }
 }

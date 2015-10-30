@@ -50,11 +50,14 @@
         </activity>
 
         <activity
-            android:name=".SecondActivity"
+            android:name=".SampleFragmentActivity"
             android:label="@string/title_activity_fragment" >
         </activity>
 
         <activity android:name=".ContactsActivity"/>
+
+        <activity android:name=".SampleV4FragmentActivity" />
+
 
 
     </application>

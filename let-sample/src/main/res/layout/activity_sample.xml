@@ -42,4 +42,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_location"/>
 
+    <Button
+        android:id="@+id/btn_v4_fragment"
+        android:text="v4Fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_fragment"/>
+
 </RelativeLayout>

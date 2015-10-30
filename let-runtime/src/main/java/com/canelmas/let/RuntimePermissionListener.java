@@ -24,6 +24,6 @@ import java.util.List;
 public interface RuntimePermissionListener {
 
     void onShowPermissionRationale(final List<String> permissionList, final RuntimePermissionRequest permissionRequest);
-    void onPermissionDenied(final List<DeniedPermissionRequest> results);
+    void onPermissionDenied(final List<DeniedPermission> deniedPermissionList);
 
 }

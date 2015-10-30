@@ -18,6 +18,7 @@ package com.canelmas.let.sample;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +28,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.canelmas.let.AskPermission;
-import com.canelmas.let.DeniedPermissionRequest;
+import com.canelmas.let.DeniedPermission;
+import com.canelmas.let.Let;
 import com.canelmas.let.RuntimePermissionListener;
 import com.canelmas.let.RuntimePermissionRequest;
 
@@ -36,7 +38,8 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SampleFragment extends android.support.v4.app.Fragment implements View.OnClickListener, RuntimePermissionListener{
+public class SampleFragment extends Fragment
+        implements View.OnClickListener, RuntimePermissionListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,9 +54,7 @@ public class SampleFragment extends android.support.v4.app.Fragment implements V
     @Override
     @AskPermission({
             Manifest.permission.SEND_SMS,
-            Manifest.permission.CALL_PHONE,
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.CALL_PHONE
     })
     public void onClick(View v) {
         Toast.makeText(getActivity(), "it works inside fragment", Toast.LENGTH_SHORT).show();
@@ -94,7 +95,12 @@ public class SampleFragment extends android.support.v4.app.Fragment implements V
     }
 
     @Override
-    public void onPermissionDenied(List<DeniedPermissionRequest> results) {
+    public void onPermissionDenied(List<DeniedPermission> results) {
+        Toast.makeText(getActivity(), "onPermissionDenied", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        Let.handle(requestCode, permissions, grantResults);
     }
 }

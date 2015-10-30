@@ -31,7 +31,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.canelmas.let.AskPermission;
-import com.canelmas.let.DeniedPermissionRequest;
+import com.canelmas.let.DeniedPermission;
 import com.canelmas.let.Let;
 import com.canelmas.let.RuntimePermissionListener;
 import com.canelmas.let.RuntimePermissionRequest;
@@ -65,11 +65,19 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
             }
         });
 
-        // usage from fragment
+        // Native fragment
         findViewById(R.id.btn_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SampleActivity.this, SecondActivity.class));
+                startActivity(new Intent(SampleActivity.this, SampleFragmentActivity.class));
+            }
+        });
+
+        // v4 fragment
+        findViewById(R.id.btn_v4_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SampleActivity.this, SampleV4FragmentActivity.class));
             }
         });
 
@@ -144,7 +152,7 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
     }
 
     @Override
-    public void onPermissionDenied(List<DeniedPermissionRequest> results) {
+    public void onPermissionDenied(List<DeniedPermission> results) {
 
         /**
          * Let's just do nothing if permission is denied without
@@ -156,7 +164,7 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
 
         final StringBuilder sb = new StringBuilder();
 
-        for (DeniedPermissionRequest result : results) {
+        for (DeniedPermission result : results) {
 
             if (result.isNeverAskAgain()) {
                 sb.append("onNeverShowAgain for " + result.getPermission());

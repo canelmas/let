@@ -16,19 +16,16 @@
 
 package com.canelmas.let;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -38,10 +35,10 @@ public final class RuntimePermissionRequest {
 
     private static final AtomicInteger PERMISSIONS_REQUEST_CODE = new AtomicInteger();
 
-    final Activity source;
+    final Object source;
     final ProceedingJoinPoint joinPoint;
 
-    public RuntimePermissionRequest(ProceedingJoinPoint joinPoint, Activity source) {
+    public RuntimePermissionRequest(ProceedingJoinPoint joinPoint, Object source) {
         this.source = source;
         this.joinPoint = joinPoint;
     }
@@ -67,6 +64,8 @@ public final class RuntimePermissionRequest {
         final List<String> permissionsToAsk = new ArrayList<>();
         final List<String> permissionsToExplain = new ArrayList<>();
 
+        final LetContext letContext = new LetContext(source);
+
         for (String permission : permissionList) {
 
             Logger.log("\t" + permission);
@@ -76,13 +75,13 @@ public final class RuntimePermissionRequest {
                 throw new LetException("Permission not valid!");
             } else {
 
-                final int permissionResult = ActivityCompat.checkSelfPermission(source, permission);
+                final int permissionResult = ContextCompat.checkSelfPermission(letContext.getActivity(), permission);
 
                 Logger.log("\t\talreadyGranted=" + String.valueOf(permissionResult != -1));
 
                 if (permissionResult == PackageManager.PERMISSION_DENIED) {
 
-                    final boolean shouldShowRationale = ActivityCompat.shouldShowRequestPermissionRationale(source, permission);
+                    final boolean shouldShowRationale = ActivityCompat.shouldShowRequestPermissionRationale(letContext.getActivity(), permission);
                     Logger.log("\t\tshowRationale=" + shouldShowRationale);
 
                     if (shouldShowRationale && !skipRationale) {
@@ -112,9 +111,10 @@ public final class RuntimePermissionRequest {
         if (!permissionsToExplain.isEmpty()) {
 
             Logger.log("<<< Should show Rationale");
-            if (null != listener)
+
+            if (null != listener) {
                 listener.onShowPermissionRationale(permissionsToExplain, new RuntimePermissionRequest(joinPoint, source));
-            else {
+            } else {
                 throw new LetException(source + " should implement RuntimePermissionListener");
             }
             return null;
@@ -126,7 +126,7 @@ public final class RuntimePermissionRequest {
 
             DelayedTasks.add(new DelayedTasks.Task(permissionsToAsk, requestCode, joinPoint));
 
-            ActivityCompat.requestPermissions(source, permissionsToAsk.toArray(new String[]{}), requestCode);
+            letContext.requestPermissions(permissionsToAsk.toArray(new String[]{}), requestCode);
 
         } else {
 

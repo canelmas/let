@@ -16,11 +16,9 @@
 
 package com.canelmas.let;
 
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -46,7 +44,7 @@ public final class LetAspect {
             return joinPoint.proceed();
         }
 
-        return new RuntimePermissionRequest(joinPoint, getActivity(source)).proceed();
+        return new RuntimePermissionRequest(joinPoint, source).proceed();
 
     }
 
@@ -75,9 +73,9 @@ public final class LetAspect {
         String[] permissions = (String[]) joinPoint.getArgs()[1];
         int[] results = (int[]) joinPoint.getArgs()[2];
 
-        final List<DeniedPermissionRequest> requestResults = new ArrayList<>();
+        final List<DeniedPermission> requestResults = new ArrayList<>();
 
-        final Activity activity = getActivity(source);
+        final LetContext letContext = new LetContext(source);
 
         for (int k= 0; k <permissions.length; k++) {
 
@@ -88,12 +86,12 @@ public final class LetAspect {
 
             if (denied) {
 
-                boolean shouldShowRationale = ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
+                boolean shouldShowRationale = ActivityCompat.shouldShowRequestPermissionRationale(letContext.getActivity(), permission);
                 boolean neverAskAgain = !shouldShowRationale;
 
-                requestResults.add(new DeniedPermissionRequest(permission, neverAskAgain));
+                requestResults.add(new DeniedPermission(permission, neverAskAgain));
 
-                Logger.log("<<< " + permissions[k] + " denied" + (neverAskAgain ? " with Never Ask Again checked." : ""));
+                Logger.log("\t" + permissions[k] + " denied" + (neverAskAgain ? " with Never Ask Again checked." : ""));
 
             }
 
@@ -102,31 +100,10 @@ public final class LetAspect {
         RuntimePermissionListener listener = RuntimePermissionListener.class.isInstance(source) ? (RuntimePermissionListener) source : null;
 
         if (null != listener && !requestResults.isEmpty()) {
+            Logger.log("<<< should handle denied permissions");
             listener.onPermissionDenied(requestResults);
         }
 
-
     }
-
-    private Activity getActivity(Object source) {
-
-        if (source instanceof Activity) {
-
-            return (Activity) source;
-
-        } else if (source instanceof Fragment) {
-
-            return ((Fragment) source).getActivity();
-
-        } else if (source instanceof android.app.Fragment) {
-
-            return ((android.app.Fragment) source).getActivity();
-
-        }
-
-        throw new LetException("Source type not supported yet!");
-    }
-
-
 
 }
