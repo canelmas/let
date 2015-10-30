@@ -8,7 +8,11 @@ Simply Add`@AskPermission` to your methods that require permissions to be grante
 ```java
 @AskPermission(ACCESS_FINE_LOCATION)
 private void getUserLocationAndDoSomething() {
-    Toast.makeText(SampleActivity.this, "Now that I have the permission, I can get your location!", Toast.LENGTH_SHORT).show();
+    Toast.makeText(
+        SampleActivity.this, 
+        "Now that I have the permission, I can get your location!", 
+        Toast.LENGTH_SHORT
+    ).show();
 }
 ``` 
 
@@ -37,7 +41,7 @@ private void makePhoneCall() {
 
 Override the `onRequestPermissionsResult` in your Activity or Fragment and let Let handle the rest.
 
-```
+```java
 @Override
 public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     Let.handle(requestCode, permissions, grantResults);
@@ -47,7 +51,7 @@ public void onRequestPermissionsResult(int requestCode, @NonNull String[] permis
 To get notified about denied permissions and rationales to be shown, make sure your Activity or Fragment 
 implements `RuntimePermissionListener`
 
-```
+```java
 public class SampleActivity extends AppCompatActivity implements RuntimePermissionListener {
 ....
 @Override
