@@ -118,6 +118,10 @@ public final class LetAspect {
 
             return ((Fragment) source).getActivity();
 
+        } else if (source instanceof android.app.Fragment) {
+
+            return ((android.app.Fragment) source).getActivity();
+
         }
 
         throw new LetException("Source type not supported yet!");
