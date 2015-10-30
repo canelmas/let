@@ -21,16 +21,6 @@ apply plugin: 'nexus'
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
 
-/*uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://localhost:8081/nexus/content/repositories/snapshots") {
-                authentication(userName: "admin", password: "admin123")
-            }
-        }
-    }
-}*/
-
 modifyPom {
     project {
         name "Let Annotations"
@@ -58,4 +48,9 @@ modifyPom {
             }
         }
     }
+}
+
+nexus {
+    snapshotRepositoryUrl = 'http://localhost:8081/nexus/content/repositories/snapshots'
+    repositoryUrl = 'http://localhost:8081/nexus/content/repositories/internal'
 }

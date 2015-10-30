@@ -2,6 +2,8 @@ buildscript {
 
     repositories {
         jcenter()
+        maven { url 'http://localhost:8081/nexus/content/repositories/snapshots'}
+        maven { url 'http://localhost:8081/nexus/content/repositories/'}
     }
 
     dependencies {
@@ -17,8 +19,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-//        maven { url 'http://localhost:8081/nexus/content/repositories/snapshots'}
-//        maven { url 'http://localhost:8081/nexus/content/repositories/'}
+        maven { url 'http://localhost:8081/nexus/content/repositories/snapshots'}
+        maven { url 'http://localhost:8081/nexus/content/repositories/'}
 
     }
 
@@ -29,15 +31,15 @@ allprojects {
 }
 
 
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: "http://localhost:8081/nexus/content/repositories/snapshots") {
-//                authentication(userName: "admin", password: "admin123")
-//            }
-////            pom.version = "1.0-SNAPSHOT"
-////            pom.artifactId = "simple-project"
-////            pom.groupId = "com.example"
-//        }
-//    }
-//}
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://localhost:8081/nexus/content/repositories/snapshots") {
+                authentication(userName: nexusUsername, password: nexusPassword)
+            }
+//            pom.version = "1.0-SNAPSHOT"
+//            pom.artifactId = "simple-project"
+//            pom.groupId = "com.example"
+        }
+    }
+}
