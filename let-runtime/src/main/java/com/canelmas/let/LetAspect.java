@@ -65,8 +65,6 @@ public final class LetAspect {
     @Around("execution(* *.onRequestPermissionsResult(..)) && target(tar) && this(source)")
     public void adviceForOnRequestPermissionsResult(final ProceedingJoinPoint joinPoint, Object tar, Object source) throws Throwable {
 
-        // TODO: 27/10/15 avoid unnecessary calls to this aspect
-
         //  make sure onRequestPermissionsResult() is executed
         joinPoint.proceed();
 

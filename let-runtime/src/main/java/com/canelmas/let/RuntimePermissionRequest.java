@@ -51,16 +51,15 @@ public final class RuntimePermissionRequest {
         return proceed(false);
     }
 
-    private Object proceed(final boolean skipRationale) {
+    private Object proceed(final boolean retry) {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
         final String[] permissionList = signature.getMethod().getAnnotation(AskPermission.class).value();
 
         Logger.log(">>> " + signature.getName() + "() requires " + permissionList.length + " permission");
-        /**
-         *  Permissions to ask and to show rationales
-         */
+
+        //  Permissions to ask and to show rationales
         final List<String> permissionsToAsk = new ArrayList<>();
         final List<String> permissionsToExplain = new ArrayList<>();
 
@@ -70,7 +69,6 @@ public final class RuntimePermissionRequest {
 
             Logger.log("\t" + permission);
 
-            // check if permission name is valid
             if (!isPermissionValid(permission)) {
                 throw new LetException("Permission not valid!");
             } else {
@@ -79,12 +77,12 @@ public final class RuntimePermissionRequest {
 
                 Logger.log("\t\talreadyGranted=" + String.valueOf(permissionResult != -1));
 
-                if (permissionResult == PackageManager.PERMISSION_DENIED) {
+                if (permissionResult != PackageManager.PERMISSION_GRANTED) {
 
-                    final boolean shouldShowRationale = ActivityCompat.shouldShowRequestPermissionRationale(letContext.getActivity(), permission);
-                    Logger.log("\t\tshowRationale=" + shouldShowRationale);
+                    final boolean showRationale = ActivityCompat.shouldShowRequestPermissionRationale(letContext.getActivity(), permission);
+                    Logger.log("\t\tshowRationale=" + showRationale);
 
-                    if (shouldShowRationale && !skipRationale) {
+                    if (showRationale && !retry) {
 
                         permissionsToExplain.add(permission);
 
@@ -117,12 +115,14 @@ public final class RuntimePermissionRequest {
             } else {
                 throw new LetException(source + " should implement RuntimePermissionListener");
             }
+
             return null;
 
         } else if (!permissionsToAsk.isEmpty()) {
 
-            final int requestCode = PERMISSIONS_REQUEST_CODE.getAndIncrement();
             Logger.log("<<< Making permission request");
+
+            final int requestCode = PERMISSIONS_REQUEST_CODE.getAndIncrement();
 
             DelayedTasks.add(new DelayedTasks.Task(permissionsToAsk, requestCode, joinPoint));
 
@@ -131,6 +131,7 @@ public final class RuntimePermissionRequest {
         } else {
 
             Logger.log("<<< Permissions granted");
+
             try {
                 return joinPoint.proceed();
             } catch (Throwable t) {
@@ -139,7 +140,6 @@ public final class RuntimePermissionRequest {
 
         }
 
-        //  actual method not called
         return null;
     }
 

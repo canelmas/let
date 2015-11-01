@@ -36,15 +36,6 @@ public final class Let {
                 
                 if (grantResults[k] == PackageManager.PERMISSION_DENIED) {
 
-                    /**
-                     * TODO: 23/10/15
-                     * come up with a way to distinguish 'Never Ask Again' state here,
-                     * without second advice and  without iterating permissions again
-                     *
-                     * only reason for second advice is that we can't access context here
-                     * and the listener
-                     */
-
                     DelayedTasks.remove(delayedTask);
 
                     return;
@@ -52,7 +43,6 @@ public final class Let {
 
             }
 
-            // required permissions are granted so proceed
             try {
                 Logger.log("<<< Required permissions granted");
                 delayedTask.execute();
