@@ -12,7 +12,7 @@ keep your code more readable.
 Usage
 ====
 
-Simply Add `@AskPermission` to your methods that require permissions to be granted at runtime.
+Add `@AskPermission` to your methods that require permissions to be granted at runtime.
  
 ```java
 @AskPermission(ACCESS_FINE_LOCATION)
@@ -32,7 +32,7 @@ only if the permissions are granted by the user.
 Let will inform about the rationales to be shown before making any permission request
 and also tell about the permissions denied (with or without 'Never Ask Again' checked)  
  
-Just make sure to override the `onRequestPermissionsResult` in your Activity or Fragment and let Let handle the rest.
+Just make sure to override the `onRequestPermissionsResult` in your Activity or Fragment.
 
 ```java
 @Override
@@ -67,7 +67,7 @@ public void onPermissionDenied(List<DeniedPermissionRequest> results) {
 }
 ```
 
-Annotate your methods with `@AskPermission`. 
+Annotate your methods with `@AskPermission` and let Let handle the rest.
 
 ```java
 @AskPermission({
@@ -92,7 +92,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.canelmas.let:let-plugin:0.1.1'
+    classpath 'com.canelmas.let:let-plugin:0.1.3-SNAPSHOT'
   }
 }
 
