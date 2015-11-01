@@ -128,6 +128,8 @@ public final class RuntimePermissionRequest {
 
             letContext.requestPermissions(permissionsToAsk.toArray(new String[]{}), requestCode);
 
+            return null;
+
         } else {
 
             Logger.log("<<< Permissions granted");
@@ -135,12 +137,11 @@ public final class RuntimePermissionRequest {
             try {
                 return joinPoint.proceed();
             } catch (Throwable t) {
-                throw new LetException("Proceeding with the origin method failed!", t);
+                throw new LetException("Proceeding with the annotated method failed!", t);
             }
 
         }
 
-        return null;
     }
 
     private boolean isPermissionValid(final String permissionName) {
