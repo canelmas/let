@@ -66,6 +66,8 @@ public final class DelayedTasks {
                 return joinPoint.proceed();
             } catch (Throwable t) {
                 throw new LetException("Future Task execution failed!", t);
+            } finally {
+                DelayedTasks.remove(this);
             }
         }
 
@@ -79,6 +81,5 @@ public final class DelayedTasks {
                     '}';
         }
     }
-
 
 }

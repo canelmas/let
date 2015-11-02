@@ -44,7 +44,9 @@ public final class Let {
             }
 
             try {
+
                 Logger.log("<<< Required permissions granted");
+
                 delayedTask.execute();
 
             } catch (Exception e) {
