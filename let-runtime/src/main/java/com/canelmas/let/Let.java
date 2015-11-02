@@ -16,16 +16,13 @@
 
 package com.canelmas.let;
 
-import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
-import android.os.Build;
 
 /**
  * Created by can on 31/08/15.
  */
 public final class Let {
 
-    @TargetApi(Build.VERSION_CODES.M)
     public static void handle(int requestCode, String[] permissions, int[] grantResults) {
 
         final DelayedTasks.Task delayedTask = DelayedTasks.get(requestCode);
