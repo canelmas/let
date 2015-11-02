@@ -13,7 +13,5 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
 <resources>
-    <string name="app_name">Let Sample App</string>
 </resources>
