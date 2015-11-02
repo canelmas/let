@@ -56,11 +56,13 @@ public final class LetAspect {
      * State is 'Never Ask Agan' only if permission requests after an initial one, keep getting
      * denied and shouldShowRequestPermissionRationale returns false.
      *
+     * int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults
+     *
      * @param joinPoint
      * @param source
      * @throws Throwable
      */
-    @Around("execution(* *.onRequestPermissionsResult(..)) && this(source)")
+    @Around("execution(void *.onRequestPermissionsResult(int, String[], int[])) && this(source)")
     public void adviceForOnRequestPermissionsResult(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
 
         //  make sure onRequestPermissionsResult() is executed
