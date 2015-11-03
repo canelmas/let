@@ -43,10 +43,9 @@ class LetPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            compile 'com.canelmas.let:let-runtime:0.1.5-SNAPSHOT'
-            // TODO this should come transitively
+            compile 'com.canelmas.let:let-runtime:0.1.6-SNAPSHOT'
             compile 'org.aspectj:aspectjrt:1.8.6'
-            compile 'com.canelmas.let:let-annotations:0.1.5-SNAPSHOT'
+            compile 'com.canelmas.let:let-annotations:0.1.6-SNAPSHOT'
         }
 
         variants.all { variant ->
