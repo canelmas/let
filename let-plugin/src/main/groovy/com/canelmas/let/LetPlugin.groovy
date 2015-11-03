@@ -50,11 +50,6 @@ class LetPlugin implements Plugin<Project> {
         }
 
         variants.all { variant ->
-            if (!variant.buildType.isDebuggable()) {
-                log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
-                return;
-            }
-
             JavaCompile javaCompile = variant.javaCompile
             javaCompile.doLast {
                 String[] args = [
