@@ -37,9 +37,13 @@ uploadArchives {
             repository(url: "http://localhost:8081/nexus/content/repositories/snapshots") {
                 authentication(userName: nexusUsername, password: nexusPassword)
             }
-//            pom.version = "1.0-SNAPSHOT"
-//            pom.artifactId = "simple-project"
-//            pom.groupId = "com.example"
         }
     }
 }
+ext.deps = [
+        supportAnnotations : 'com.android.support:support-annotations:23.0.1',
+        supportDesign : 'com.android.support:design:23.0.1',
+        appCompatv7 : 'com.android.support:appcompat-v7:23.0.1',
+]
+
+

@@ -13,37 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.aspectj.bridge.IMessage
-import org.aspectj.bridge.MessageHandler
-import org.aspectj.tools.ajc.Main
-
 buildscript {
     repositories {
         jcenter()
-        mavenCentral()
-//        maven { url 'http://localhost:8081/nexus/content/repositories/snapshots/'}
-//        maven { url 'http://localhost:8081/nexus/content/repositories/internal/'}
+        maven { url 'http://localhost:8081/nexus/content/repositories/snapshots'}
+        maven { url 'http://localhost:8081/nexus/content/repositories/'}
     }
     dependencies {
-        classpath 'org.aspectj:aspectjtools:1.8.6'
-//        classpath 'com.canelmas.permissioncompat:permission-compat-plugin:1.0.0-SNAPSHOT'
+        classpath 'com.canelmas.let:let-plugin:0.1.3-SNAPSHOT'
     }
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-//apply plugin: 'lovely'
+apply plugin: 'let'
+
 dependencies {
     repositories {
-        mavenCentral()
-
-        // NOTE: This is only needed when developing the plugin!
-        /*mavenLocal()
-        maven { url 'http://localhost:8081/nexus/content/repositories/internal/'}
-        maven { url 'http://localhost:8081/nexus/content/repositories/snapshots/'}*/
+        jcenter()
+//        mavenLocal()
+        maven { url 'http://localhost:8081/nexus/content/repositories/snapshots/' }
+        maven { url 'http://localhost:8081/nexus/content/repositories/'}
     }
-//    compile project(':permission-compat-annotations')
+
 }
 
 android {
@@ -60,7 +51,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -69,54 +60,11 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:design:23.0.1'
+
+    compile deps.appCompatv7
+    compile deps.supportDesign
+
     testCompile 'junit:junit:4.12'
-    compile project(':let-runtime')
-    compile project(':let-annotations')
-//    apt project(':permission-compat-compiler')
+
     compile 'com.android.tools:annotations:24.3.0'
-}
-
-final def log = project.logger
-final def variants = project.android.applicationVariants
-
-variants.all { variant ->
-    if (!variant.buildType.isDebuggable()) {
-        log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
-        return;
-    }
-
-    JavaCompile javaCompile = variant.javaCompile
-    javaCompile.doLast {
-        String[] args = ["-showWeaveInfo",
-                         "-1.5",
-                         "-inpath", javaCompile.destinationDir.toString(),
-                         "-aspectpath", javaCompile.classpath.asPath,
-                         "-d", javaCompile.destinationDir.toString(),
-                         "-classpath", javaCompile.classpath.asPath,
-                         "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)]
-        log.debug "ajc args: " + Arrays.toString(args)
-
-        MessageHandler handler = new MessageHandler(true);
-        new Main().run(args, handler);
-        for (IMessage message : handler.getMessages(null, true)) {
-            switch (message.getKind()) {
-                case IMessage.ABORT:
-                case IMessage.ERROR:
-                case IMessage.FAIL:
-                    log.error message.message, message.thrown
-                    break;
-                case IMessage.WARNING:
-                    log.warn message.message, message.thrown
-                    break;
-                case IMessage.INFO:
-                    log.info message.message, message.thrown
-                    break;
-                case IMessage.DEBUG:
-                    log.debug message.message, message.thrown
-                    break;
-            }
-        }
-    }
 }
