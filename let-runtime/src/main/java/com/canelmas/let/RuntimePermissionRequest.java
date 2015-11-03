@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -55,7 +56,9 @@ public final class RuntimePermissionRequest {
 
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
-        final String[] permissionList = signature.getMethod().getAnnotation(AskPermission.class).value();
+        Method method = signature.getMethod();
+
+        final String[] permissionList = method.getAnnotation(AskPermission.class).value();
 
         Logger.log(">>> " + signature.getName() + "() requires " + permissionList.length + " permission");
 
