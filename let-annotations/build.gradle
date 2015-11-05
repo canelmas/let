@@ -15,7 +15,6 @@
  */
 
 apply plugin: 'java'
-//apply plugin: 'maven'
 apply plugin: 'nexus'
 
 sourceCompatibility = JavaVersion.VERSION_1_6
@@ -23,7 +22,7 @@ targetCompatibility = JavaVersion.VERSION_1_6
 
 modifyPom {
     project {
-        name "Let Annotations"
+        name POM_NAME
         description POM_DESCRIPTION
         url POM_URL
 
@@ -35,9 +34,9 @@ modifyPom {
 
         licenses {
             license {
-                name POM_LICENCE_NAME
-                url POM_LICENCE_URL
-                distribution POM_LICENCE_DIST
+                name POM_LICENSE_NAME
+                url POM_LICENSE_URL
+                distribution POM_LICENSE_DIST
             }
         }
 
@@ -48,9 +47,4 @@ modifyPom {
             }
         }
     }
-}
-
-nexus {
-    snapshotRepositoryUrl = 'http://localhost:8081/nexus/content/repositories/snapshots'
-    repositoryUrl = 'http://localhost:8081/nexus/content/repositories/internal'
 }

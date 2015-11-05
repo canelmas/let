@@ -1,3 +1,7 @@
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
 /*
  * Copyright (C) 2015 Can Elmas
  *
@@ -13,13 +17,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+buildscript {
+    repositories {
+        jcenter()
+    }
 
-import org.aspectj.bridge.IMessage
-import org.aspectj.bridge.MessageHandler
-import org.aspectj.tools.ajc.Main
+    dependencies {
+        classpath 'org.aspectj:aspectjtools:1.8.6'
+        classpath 'com.github.dcendents:android-maven-plugin:1.2'
+    }
+}
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply from: '../gradle-mvn-push.gradle'
 
 dependencies {
     compile 'org.aspectj:aspectjrt:1.8.6'
@@ -31,23 +42,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-group = GROUP
-version = VERSION_NAME
-
-install {
-    repositories {
-        mavenDeployer {
-            repository(url: "http://localhost:8081/nexus/content/repositories/snapshots")
-        }
-    }
-}
-
 android {
-    compileSdkVersion 23
-    buildToolsVersion "22.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 8
+        minSdkVersion rootProject.ext.minSdkVersion
     }
 
     compileOptions {
