@@ -41,12 +41,12 @@ private void showContacts() {
 }
 ```
 
-Let will check these annotated methods and execute them unless the permissions required are granted;
+Let will check these annotated methods and execute them unless permissions required are granted;
 otherwise Let will request these permissions at runtime, examine the result and execute the method 
 only if the permissions are granted by user.
   
 Let will also inform about the rationales before making any permission request
-and tell about denied permissions (with or without 'Never Ask Again' checked)  
+and tell about denied permissions whether they're simply denied or with 'Never Ask Again' checked.   
  
 Just make sure to override the `onRequestPermissionsResult` in your Activity or Fragment, where your
 `@AskPermission` annotated methods are located:
@@ -75,11 +75,12 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
     }
   
     @Override
-    public void onPermissionDenied(List<DeniedPermissionRequest> results) {
+    public void onPermissionDenied(List<DeniedPermission> results) {
         /**
-        * Do whatever you need to do about denied permissions e.g. update UI and prompt a dialog to 
-        * tell user to go to the app settings screen in order to grant again the permission denied with 
-        * 'Never Ask Again' 
+        * Do whatever you need to do about denied permissions
+        *   - update UI 
+        *   - if permission is denied with 'Never Ask Again', prompt a dialog to tell user
+        *   to go to the app settings screen in order to grant again the permission denied 
         */              
     }
     
