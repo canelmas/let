@@ -27,7 +27,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface AskPermission {
 
-//    Permission[] value();
     String[] value() default "";
 
 }
