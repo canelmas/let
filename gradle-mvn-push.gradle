@@ -42,7 +42,7 @@ afterEvaluate { project ->
                 repository(url: RELEASE_REPOSITORY_URL) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
-                snapshotRepository(url: RELEASE_REPOSITORY_URL) {
+                snapshotRepository(url: SNAPSHOT_REPOSITORY_URL) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
