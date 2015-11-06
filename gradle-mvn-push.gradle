@@ -39,10 +39,10 @@ afterEvaluate { project ->
                 pom.artifactId = POM_ARTIFACT_ID
                 pom.version = VERSION_NAME
 
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                repository(url: RELEASE_REPOSITORY_URL) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                snapshotRepository(url: RELEASE_REPOSITORY_URL) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
                 }
 
