@@ -73,7 +73,7 @@ public final class RuntimePermissionRequest {
             Logger.log("\t" + permission);
 
             if (!isPermissionValid(permission)) {
-                throw new LetException("Permission not valid!");
+                throw new LetException("Permission name not valid!");
             } else {
 
                 final int permissionResult = ContextCompat.checkSelfPermission(letContext.getActivity(), permission);
@@ -116,7 +116,7 @@ public final class RuntimePermissionRequest {
             if (null != listener) {
                 listener.onShowPermissionRationale(permissionsToExplain, new RuntimePermissionRequest(joinPoint, source));
             } else {
-                throw new LetException(source + " should implement RuntimePermissionListener");
+                throw new LetException(source + " or its parent should implement RuntimePermissionListener");
             }
 
             return null;

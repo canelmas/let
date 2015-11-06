@@ -58,8 +58,6 @@
 
         <activity android:name=".SampleV4FragmentActivity" />
 
-
-
     </application>
 
 </manifest>
