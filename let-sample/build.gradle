@@ -16,10 +16,11 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        mavenLocal()
     }
     dependencies {
-        classpath 'com.canelmas.let:let-plugin:0.1.8-SNAPSHOT'
+        classpath 'com.canelmas.let:let-plugin:0.1.9-SNAPSHOT'
     }
 }
 
@@ -27,7 +28,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'let'
 
 repositories {
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+//    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    mavenLocal()
 }
 
 android {

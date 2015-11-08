@@ -22,11 +22,28 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Bind a field to the specified string resource ID.
+ *
+ * <pre><code>
+ * {@literal @}AskPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+ * void getLocationAndDoSomething(){};
+ * </code></pre>
+ *
+ * <pre><code>
+ * {@literal @}AskPermission({
+ *     Manifest.permission.READ_CONTACTS,
+ *     Manifest.permission.CALL_PHONE,
+ * })
+ * void deepDiveIntoTheApp(){};
+ * </code></pre>
+ */
 @Documented
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.METHOD)
 public @interface AskPermission {
 
+    /* Permission name */
     String[] value() default "";
 
 }
