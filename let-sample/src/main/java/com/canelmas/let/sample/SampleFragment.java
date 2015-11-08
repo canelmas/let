@@ -101,6 +101,6 @@ public class SampleFragment extends Fragment
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Let.handle(requestCode, permissions, grantResults);
+        Let.handle(this, requestCode, permissions, grantResults);
     }
 }

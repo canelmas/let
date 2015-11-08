@@ -33,7 +33,7 @@ public final class DeniedPermission {
         return permission;
     }
 
-    public boolean isNeverAskAgain() {
+    public boolean isNeverAskAgainChecked() {
         return neverAskAgain;
     }
 }

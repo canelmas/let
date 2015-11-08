@@ -17,39 +17,76 @@
 package com.canelmas.let;
 
 import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by can on 31/08/15.
  */
 public final class Let {
 
-    public static void handle(int requestCode, String[] permissions, int[] grantResults) {
+    /**
+     * Check permission results and execute the {@link com.canelmas.let.AskPermission} annotated,
+     * runtime permission required method afterwards if each permission required is granted.
+     *
+     * @param source
+     * @param requestCode The request code received in {@link android.app.Activity#onRequestPermissionsResult(int, String[], int[])}
+     *                    or {@link android.app.Fragment#onRequestPermissionsResult(int, String[], int[])}
+     * @param permissions Permission list received in {@link android.app.Activity#onRequestPermissionsResult(int, String[], int[])}
+     *                    or {@link android.app.Fragment#onRequestPermissionsResult(int, String[], int[])}
+     * @param grantResults Result list received in {@link android.app.Activity#onRequestPermissionsResult(int, String[], int[])}
+     *                     or {@link android.app.Fragment#onRequestPermissionsResult(int, String[], int[])}
+     */
+    public static void handle(Object source, int requestCode, String[] permissions, int[] grantResults) {
 
         final DelayedTasks.Task delayedTask = DelayedTasks.get(requestCode);
 
         if (null != delayedTask) {
 
+            final List<DeniedPermission> deniedPermissions = new ArrayList<>();
+
+            final LetContext letContext = new LetContext(source);
+
             for (int k = 0; k < permissions.length; k++) {
-                
-                if (grantResults[k] == PackageManager.PERMISSION_DENIED) {
 
-                    DelayedTasks.remove(delayedTask);
+                boolean denied = grantResults[k]== PackageManager.PERMISSION_DENIED;
 
-                    return;
+                if (denied) {
+
+                    boolean shouldShowRationale = ActivityCompat.shouldShowRequestPermissionRationale(letContext.getActivity(), permissions[k]);
+                    boolean neverAskAgain = !shouldShowRationale;
+
+                    deniedPermissions.add(new DeniedPermission(permissions[k], neverAskAgain));
+
+                    Logger.log("\t" + permissions[k] + " denied" + (neverAskAgain ? " with Never Ask Again checked." : ""));
                 }
 
             }
 
-            try {
+            if (deniedPermissions.isEmpty()) {
 
-                Logger.log("<<< Required permissions granted");
+                try {
+                    Logger.log("<<< Required permissions granted");
+                    delayedTask.execute();
+                } catch (Exception e) {
+                    throw new LetException("Delayed Execution Failed!", e);
+                }
 
-                delayedTask.execute();
+            } else {
 
-            } catch (Exception e) {
-                throw new LetException("Delayed Execution Failed!", e);
+                RuntimePermissionListener listener = RuntimePermissionListener.class.isInstance(source) ? (RuntimePermissionListener) source : null;
+
+                if (null != listener) {
+                    Logger.log("<<< should handle denied permissions");
+                    listener.onPermissionDenied(deniedPermissions);
+                }
+
             }
 
+        } else {
+            Logger.log("No delayed task to execute.");
         }
 
     }

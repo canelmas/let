@@ -16,16 +16,11 @@
 
 package com.canelmas.let;
 
-import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by can on 31/08/15.
@@ -36,6 +31,22 @@ public final class LetAspect {
     private LetAspect() {
     }
 
+    /**
+     * Advice that triggers the runtime permission request,
+     * executed around {@link AskPermission} annotated methods.
+     *
+     * #ProceedingJoinPoint is executed if the runtime is below {@link android.os.Build.VERSION_CODES#M}
+     *
+     * @see {@link LetContext}
+     * @see {@link AskPermission}
+     *
+     * @param joinPoint Annotated method
+     * @param source Source of the annotated method i.e {@link android.app.Fragment} or
+     * {@link android.app.Activity}
+     * @return #joinPoint.proceed if annotated method should be executed; {@link RuntimePermissionRequest#proceed()}
+     * otherwise
+     * @throws Throwable
+     */
     @Around("execution(@com.canelmas.let.AskPermission * *(..)) && this(source)")
     public Object annotatedMethods(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
 
@@ -45,62 +56,6 @@ public final class LetAspect {
         }
 
         return new RuntimePermissionRequest(joinPoint, source).proceed();
-
-    }
-
-    /**
-     *
-     * This advice is needed for distinguishing the 'Never Ask Again' and 'Thank you, but not now!'
-     * states.
-     *
-     * State is 'Never Ask Agan' only if permission requests after an initial one, keep getting
-     * denied and shouldShowRequestPermissionRationale returns false.
-     *
-     * int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults
-     *
-     * @param joinPoint
-     * @param source
-     * @throws Throwable
-     */
-    @Around("execution(void *.onRequestPermissionsResult(int, String[], int[])) && this(source)")
-    public void onRequestPermissionsResultMethods(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
-
-        //  make sure onRequestPermissionsResult() is executed
-        joinPoint.proceed();
-
-        String[] permissions = (String[]) joinPoint.getArgs()[1];
-        int[] results = (int[]) joinPoint.getArgs()[2];
-
-        final List<DeniedPermission> requestResults = new ArrayList<>();
-
-        final LetContext letContext = new LetContext(source);
-
-        for (int k= 0; k <permissions.length; k++) {
-
-            String permission = permissions[k];
-            int result = results[k];
-
-            boolean denied = result == PackageManager.PERMISSION_DENIED;
-
-            if (denied) {
-
-                boolean shouldShowRationale = ActivityCompat.shouldShowRequestPermissionRationale(letContext.getActivity(), permission);
-                boolean neverAskAgain = !shouldShowRationale;
-
-                requestResults.add(new DeniedPermission(permission, neverAskAgain));
-
-                Logger.log("\t" + permissions[k] + " denied" + (neverAskAgain ? " with Never Ask Again checked." : ""));
-
-            }
-
-        }
-
-        RuntimePermissionListener listener = RuntimePermissionListener.class.isInstance(source) ? (RuntimePermissionListener) source : null;
-
-        if (null != listener && !requestResults.isEmpty()) {
-            Logger.log("<<< should handle denied permissions");
-            listener.onPermissionDenied(requestResults);
-        }
 
     }
 

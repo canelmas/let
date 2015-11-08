@@ -83,8 +83,6 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
 
     }
 
-
-
     @AskPermission(ACCESS_FINE_LOCATION)
     private void accessLocationAndDoSomething() {
         Toast.makeText(SampleActivity.this, "just accessed location and will make use of it!", Toast.LENGTH_SHORT).show();
@@ -106,13 +104,13 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Let.handle(requestCode, permissions, grantResults);
+        Let.handle(this, requestCode, permissions, grantResults);
     }
 
     @Override
     public void onShowPermissionRationale(List<String> permissions, final RuntimePermissionRequest request) {
 
-        //  tell user why you need those permissions
+        //  tell user why you need these permissions
         final StringBuilder sb = new StringBuilder();
 
         for (String permission : permissions) {
@@ -137,18 +135,6 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
                 })
                 .show();
 
-        // TODO: 20/10/15 what happens if request not retried
-
-    }
-
-    private String getRationale(String permission) {
-        if (permission.equals(Manifest.permission.READ_CONTACTS) || permission.equals(Manifest.permission.WRITE_CONTACTS)) {
-            return getString(R.string.rationale_contacts);
-        } else if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            return getString(R.string.rationale_location);
-        } else {
-            return getString(R.string.rationale_storage_general);
-        }
     }
 
     @Override
@@ -166,7 +152,7 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
 
         for (DeniedPermission result : results) {
 
-            if (result.isNeverAskAgain()) {
+            if (result.isNeverAskAgainChecked()) {
                 sb.append("onNeverShowAgain for " + result.getPermission());
                 sb.append("\n");
             }
@@ -194,6 +180,16 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
         }
 
 
+    }
+
+    private String getRationale(String permission) {
+        if (permission.equals(Manifest.permission.READ_CONTACTS) || permission.equals(Manifest.permission.WRITE_CONTACTS)) {
+            return getString(R.string.rationale_contacts);
+        } else if (permission.equals(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            return getString(R.string.rationale_location);
+        } else {
+            return getString(R.string.rationale_storage_general);
+        }
     }
 
     @Override
