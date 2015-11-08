@@ -86,13 +86,9 @@ public final class RuntimePermissionRequest {
                     Logger.log("\t\tshowRationale=" + showRationale);
 
                     if (showRationale && !retry) {
-
                         permissionsToExplain.add(permission);
-
                     } else {
-
                         permissionsToAsk.add(permission);
-
                     }
 
                 }

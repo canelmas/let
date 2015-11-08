@@ -35,7 +35,7 @@ public final class LetAspect {
      * Advice that triggers the runtime permission request,
      * executed around {@link AskPermission} annotated methods.
      *
-     * #ProceedingJoinPoint is executed if the runtime is below {@link android.os.Build.VERSION_CODES#M}
+     * #ProceedingJoinPoint is proceeded if the runtime is below {@link android.os.Build.VERSION_CODES#M}
      *
      * @see {@link LetContext}
      * @see {@link AskPermission}
@@ -50,7 +50,6 @@ public final class LetAspect {
     @Around("execution(@com.canelmas.let.AskPermission * *(..)) && this(source)")
     public Object annotatedMethods(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
 
-        //  proceed as it is for devices running prior to M
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return joinPoint.proceed();
         }
