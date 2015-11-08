@@ -37,7 +37,7 @@ public final class LetAspect {
     }
 
     @Around("execution(@com.canelmas.let.AskPermission * *(..)) && this(source)")
-    public Object adviceForAskPermissionAnnotatedMethods(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
+    public Object annotatedMethods(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
 
         //  proceed as it is for devices running prior to M
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -63,7 +63,7 @@ public final class LetAspect {
      * @throws Throwable
      */
     @Around("execution(void *.onRequestPermissionsResult(int, String[], int[])) && this(source)")
-    public void adviceForOnRequestPermissionsResult(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
+    public void onRequestPermissionsResultMethods(final ProceedingJoinPoint joinPoint, Object source) throws Throwable {
 
         //  make sure onRequestPermissionsResult() is executed
         joinPoint.proceed();
