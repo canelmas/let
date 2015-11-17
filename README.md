@@ -4,13 +4,13 @@ Let
 Annotation based simple API flavoured with AOP to handle new Android runtime permission model.
 
 If you check [Google's Samples] (https://github.com/googlesamples/android-RuntimePermissions/blob/master/Application/src/main/java/com/example/android/system/runtimepermissions/MainActivity.java) 
-about the new permission model, you'll see a lot of boiler plate code just for requesting, handling
+about the new permission model, you'll see a lot of boiler plate code for requesting, handling
 and retrying the request for required permissions.
 
-Let will minimize boiler plate code you have to write for requesting and handling permissions, hence 
+Let will minimize the boiler plate code you have to write for requesting and handling permissions and hence 
 help you keep your code more readable.  
   
-Usage
+Let let Handle
 ====
 
 Annotate your methods requiring permissions with `@AskPermission` and let Let handle the rest.
@@ -41,12 +41,12 @@ private void showContacts() {
 }
 ```
 
-Let will check these annotated methods and execute them unless permissions required are granted;
-otherwise Let will request these permissions at runtime, examine the result and execute the method 
-only if the permissions are granted by user.
+Let will check these annotated methods and execute them unless the permissions required are granted;
+otherwise Let will put on hold the method execution and request these permissions at runtime. After examining 
+the permission request result and Let will execute the method only if the permissions are granted by user.
   
 Let will also inform about the rationales before making any permission request
-and tell about denied permissions whether they're simply denied or with 'Never Ask Again' checked.   
+and tell about denied permissions, whether they're simply denied or with 'Never Ask Again' checked.   
  
 Just make sure to override the `onRequestPermissionsResult` in your Activity or Fragment, where your
 `@AskPermission` annotated methods are located:
@@ -54,12 +54,12 @@ Just make sure to override the `onRequestPermissionsResult` in your Activity or 
 ```java
 @Override
 public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    Let.handle(requestCode, permissions, grantResults);
+    Let.handle(this, requestCode, permissions, grantResults);
 }
 ```
 
-Make sure your Activity or Fragment implements `RuntimePermissionListener` in order to get notified 
-about denied permissions and rationales: 
+And make sure your Activity or Fragment implements `RuntimePermissionListener` in order to get notified 
+about denied permissions and rationales:
 
 ```java
 public class SampleActivity extends AppCompatActivity implements RuntimePermissionListener {
@@ -77,8 +77,8 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
     @Override
     public void onPermissionDenied(List<DeniedPermission> results) {
         /**
-        * Do whatever you need to do about denied permissions
-        *   - update UI 
+        * Do whatever you need to do about denied permissions:
+        *   - update UI
         *   - if permission is denied with 'Never Ask Again', prompt a dialog to tell user
         *   to go to the app settings screen in order to grant again the permission denied 
         */              
@@ -97,12 +97,11 @@ Add it to your project today!
 
 buildscript {
     repositories {                    
-        jcenter()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        jcenter()        
     }
 
     dependencies {        
-        classpath 'com.canelmas.let:let-plugin:0.1.8-SNAPSHOT'
+        classpath 'com.canelmas.let:let-plugin:0.1.9'
     }
 }
 
@@ -111,24 +110,20 @@ apply plugin: 'com.android.application'
 apply plugin: 'let'
 
 repositories {        
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    jcenter()
 }
 ```
 
 Proguard
 ====
 
-Make sure to add following lines to your proguard rules
+Make sure your proguard rule set includes following lines: 
 
     -keep class com.canelmas.let.** { *; }
     -keepnames class * implements com.canelmas.let.RuntimePermissionListener
 
     -keepclassmembers class * implements com.canelmas.let.RuntimePermissionListener {
         public void onRequestPermissionsResult(***);
-    }
-
-    -keepclasseswithmembernames class * {
-        @com.canelmas.let.* <fields>;
     }
 
     -keepclasseswithmembernames class * {
