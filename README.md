@@ -30,14 +30,12 @@ private void getUserLocationAndDoSomething() {
 ```java
 @AskPermission({
             Manifest.permission.READ_CONTACTS,
-            Manifest.permission.WRITE_CONTACTS          
+            Manifest.permission.CALL_PHONE,
+            Manifest.permission.CAMERA
 })
-private void showContacts() {
-
-    Toast.makeText(SampleActivity.this, "Calling..", Toast.LENGTH_SHORT).show();
-
-    final Intent intent = new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:00123124234234"));
-    startActivity(intent);
+private void skipTutorial() {
+    // permissions needed for app to offer best xp are granted
+    startActivity(new Intent(this, HomeActivity.class));
 }
 ```
 
@@ -53,7 +51,7 @@ Just make sure to override the `onRequestPermissionsResult` in your Activity or 
 
 ```java
 @Override
-public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
     Let.handle(this, requestCode, permissions, grantResults);
 }
 ```
