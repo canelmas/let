@@ -20,7 +20,7 @@ Annotate your methods requiring permissions with `@AskPermission` and let Let ha
 private void getUserLocationAndDoSomething() {
     Toast.makeText(
         SampleActivity.this, 
-        "Now that I have the permission, I can get your location!", 
+        "Now that I have the permission, I'll get your location and do something with it", 
         Toast.LENGTH_SHORT
     ).show();
     ...
@@ -34,17 +34,17 @@ private void getUserLocationAndDoSomething() {
             Manifest.permission.CAMERA
 })
 private void skipTutorial() {
-    // permissions needed for app to offer best xp are granted
+    // permissions needed for best experience are granted; let' go to the app's home screen
     startActivity(new Intent(this, HomeActivity.class));
 }
 ```
 
 Let will check these annotated methods and execute them unless the permissions required are granted;
 otherwise Let will put on hold the method execution and request these permissions at runtime. After examining 
-the permission request result and Let will execute the method only if the permissions are granted by user.
+the permission request result, Let will execute the method already put on hold only if the permissions are granted by user.
   
 Let will also inform about the rationales before making any permission request
-and tell about denied permissions, whether they're simply denied or with 'Never Ask Again' checked.   
+and tell about denied permissions; whether they're simply denied or with 'Never Ask Again' checked.   
  
 Just make sure to override the `onRequestPermissionsResult` in your Activity or Fragment, where your
 `@AskPermission` annotated methods are located:
@@ -73,7 +73,7 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
     }
   
     @Override
-    public void onPermissionDenied(List<DeniedPermission> results) {
+    public void onPermissionDenied(List<DeniedPermission> deniedPermissionList) {
         /**
         * Do whatever you need to do about denied permissions:
         *   - update UI
