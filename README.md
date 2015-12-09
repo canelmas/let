@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Let-green.svg?style=true)](https://android-arsenal.com/details/1/2843)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Let-green.svg?style=true)](https://android-arsenal.com/details/1/2843) [![](https://img.shields.io/badge/AndroidWeekly-%23182-red.svg)](http://androidweekly.net/issues/issue-182)
 
 Let
 ====
@@ -22,7 +22,7 @@ Annotate your methods requiring permissions with `@AskPermission` and let Let ha
 private void getUserLocationAndDoSomething() {
     Toast.makeText(
         SampleActivity.this, 
-        "Now that I have the permission, I'll get your location and do something with it", 
+        "Now that I have the permission I need, I'll get your location and do something with it", 
         Toast.LENGTH_SHORT
     ).show();
     ...
@@ -36,7 +36,7 @@ private void getUserLocationAndDoSomething() {
             Manifest.permission.CAMERA
 })
 private void skipTutorial() {
-    // permissions needed for best experience are granted; let' go to the app's home screen
+    // permissions needed for best the app experience are granted; let's go to the app's home screen
     startActivity(new Intent(this, HomeActivity.class));
 }
 ```
