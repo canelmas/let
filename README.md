@@ -3,7 +3,7 @@
 Let
 ====
 
-Annotation based simple API flavoured with AOP to handle new Android runtime permission model.
+Annotation based simple API flavoured with [AOP] (https://en.wikipedia.org/wiki/Aspect-oriented_programming) to handle new Android runtime permission model.
 
 If you check [Google's Samples] (https://github.com/googlesamples/android-RuntimePermissions/blob/master/Application/src/main/java/com/example/android/system/runtimepermissions/MainActivity.java) 
 about the new permission model, you'll see a lot of boiler plate code for requesting, handling
@@ -36,7 +36,7 @@ private void getUserLocationAndDoSomething() {
             Manifest.permission.CAMERA
 })
 private void skipTutorial() {
-    // permissions needed for best the app experience are granted; let's go to the app's home screen
+    // permissions needed for the best app experience are granted; let's go to the app's home screen
     startActivity(new Intent(this, HomeActivity.class));
 }
 ```
