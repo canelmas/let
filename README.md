@@ -69,7 +69,7 @@ public class SampleActivity extends AppCompatActivity implements RuntimePermissi
     @Override
     public void onShowPermissionRationale(List<String> permissions, final RuntimePermissionRequest request) {
         /**
-        * show permission rationales in a dialog, wait for user confirmation and retry the permission 
+        * you may show permission rationales in a dialog, wait for user confirmation and retry the permission 
         * request by calling request.retry()    
         */               
     }
