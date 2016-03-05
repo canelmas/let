@@ -1,8 +1,7 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Let-green.svg?style=true)](https://android-arsenal.com/details/1/2843) [![](https://img.shields.io/badge/AndroidWeekly-%23182-red.svg)](http://androidweekly.net/issues/issue-182) [![Gitter](https://badges.gitter.im/canelmas/let.svg)](https://gitter.im/canelmas/let?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 Let
 ====
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Let-green.svg?style=true)](https://android-arsenal.com/details/1/2843) [![](https://img.shields.io/badge/AndroidWeekly-%23182-red.svg)](http://androidweekly.net/issues/issue-182)
 [![Join the chat at https://gitter.im/canelmas/let](https://badges.gitter.im/canelmas/let.svg)](https://gitter.im/canelmas/let?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Annotation based simple API flavoured with [AOP] (https://en.wikipedia.org/wiki/Aspect-oriented_programming) to handle new Android runtime permission model.
