@@ -3,6 +3,8 @@
 Let
 ====
 
+[![Join the chat at https://gitter.im/canelmas/let](https://badges.gitter.im/canelmas/let.svg)](https://gitter.im/canelmas/let?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Annotation based simple API flavoured with [AOP] (https://en.wikipedia.org/wiki/Aspect-oriented_programming) to handle new Android runtime permission model.
 
 If you check [Google's Samples] (https://github.com/googlesamples/android-RuntimePermissions/blob/master/Application/src/main/java/com/example/android/system/runtimepermissions/MainActivity.java) 
