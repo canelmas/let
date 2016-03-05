@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Let-green.svg?style=true)](https://android-arsenal.com/details/1/2843) [![](https://img.shields.io/badge/AndroidWeekly-%23182-red.svg)](http://androidweekly.net/issues/issue-182)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Let-green.svg?style=true)](https://android-arsenal.com/details/1/2843) [![](https://img.shields.io/badge/AndroidWeekly-%23182-red.svg)](http://androidweekly.net/issues/issue-182) [![Gitter](https://badges.gitter.im/canelmas/let.svg)](https://gitter.im/canelmas/let?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Let
 ====
