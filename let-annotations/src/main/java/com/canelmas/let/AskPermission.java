@@ -39,7 +39,7 @@ import java.lang.annotation.Target;
  * </code></pre>
  */
 @Documented
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface AskPermission {
 
