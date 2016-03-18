@@ -102,7 +102,7 @@ buildscript {
     }
 
     dependencies {        
-        classpath 'com.canelmas.let:let-plugin:0.1.9'
+        classpath 'com.canelmas.let:let-plugin:0.1.10'
     }
 }
 
