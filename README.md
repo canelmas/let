@@ -102,7 +102,7 @@ buildscript {
     }
 
     dependencies {        
-        classpath 'com.canelmas.let:let-plugin:0.1.10'
+        classpath 'com.canelmas.let:let-plugin:0.1.9'
     }
 }
 
@@ -112,6 +112,27 @@ apply plugin: 'let'
 
 repositories {        
     jcenter()
+}
+```
+
+For snapshot version :
+
+```grrovy
+buildscript {
+    repositories {                    
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }        
+    }
+
+    dependencies {        
+        classpath 'com.canelmas.let:let-plugin:0.1.10-SNAPSHOT'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'let'
+
+repositories {    
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 ```
 
