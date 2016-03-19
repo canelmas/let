@@ -102,7 +102,7 @@ buildscript {
     }
 
     dependencies {        
-        classpath 'com.canelmas.let:let-plugin:0.1.9'
+        classpath 'com.canelmas.let:let-plugin:0.1.10'
     }
 }
 
@@ -115,9 +115,10 @@ repositories {
 }
 ```
 
-For snapshot version :
+For SNAPSHOT version :
 
-```grrovy
+```groovy
+
 buildscript {
     repositories {                    
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }        
