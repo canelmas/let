@@ -121,7 +121,7 @@ public final class RuntimePermissionRequest {
 
             Logger.log("<<< Making permission request");
 
-            final int requestCode = PERMISSIONS_REQUEST_CODE.getAndIncrement();
+            final int requestCode = PERMISSIONS_REQUEST_CODE.getAndIncrement() & 0xff;
 
             DelayedTasks.add(new DelayedTasks.Task(permissionsToAsk, requestCode, joinPoint));
 
