@@ -102,7 +102,7 @@ buildscript {
     }
 
     dependencies {        
-        classpath 'com.canelmas.let:let-plugin:0.1.10'
+        classpath 'com.canelmas.let:let-plugin:0.1.11'
     }
 }
 
@@ -125,7 +125,7 @@ buildscript {
     }
 
     dependencies {        
-        classpath 'com.canelmas.let:let-plugin:0.1.10-SNAPSHOT'
+        classpath 'com.canelmas.let:let-plugin:0.1.11-SNAPSHOT'
     }
 }
 
@@ -156,7 +156,7 @@ Make sure your proguard rule set includes following lines:
 License
 ====
 
-    Copyright 2015 Can Elmas
+    Copyright 2016 Can Elmas
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
