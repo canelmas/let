@@ -6,7 +6,7 @@ buildscript {
             minSdkVersion     : 14,
             targetSdkVersion  : 26,
             supportLibrary    : '26.0.1',
-            aspectjrt         : '1.8.10',
+            aspectjrt         : '1.8.9',
             aspectjtools      : '1.8.9',
             androidPlugin     : '3.0.0-beta4',
             androidMavenPlugin: '1.2'
