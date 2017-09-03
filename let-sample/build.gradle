@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 buildscript {
     repositories {
         jcenter()
-        mavenLocal()
         google()
-//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
         classpath 'com.canelmas.let:let-plugin:1.0.0-beta1'
@@ -27,12 +26,6 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'let'
-
-repositories {
-    jcenter()
-    mavenLocal()
-//    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
 
 android {
     compileSdkVersion versions.compileSdkVersion
