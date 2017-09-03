@@ -34,13 +34,13 @@ repositories {
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
 
     defaultConfig {
         applicationId "com.canelmas.let.sample"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -64,7 +64,7 @@ dependencies {
     compile deps.appCompatv7
     compile deps.supportDesign
 
-    testCompile 'junit:junit:4.12'
+    testCompile deps.junit
 
-    compile 'com.android.tools:annotations:24.3.0'
+//    compile 'com.android.tools:annotations:24.3.0'
 }

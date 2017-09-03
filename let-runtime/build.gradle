@@ -23,8 +23,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.aspectj:aspectjtools:1.8.6'
-        classpath 'com.github.dcendents:android-maven-plugin:1.2'
+        classpath deps.aspectjtools
+        classpath deps.androidMavenPlugin
     }
 }
 
@@ -33,21 +33,21 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply from: '../gradle-mvn-push.gradle'
 
 dependencies {
-    compile 'org.aspectj:aspectjrt:1.8.6'
+    compile deps.aspectjrt
     compile project(':let-annotations')
 
     compile deps.appCompatv7
     compile deps.supportAnnotations
 
-    testCompile 'junit:junit:4.12'
+    testCompile deps.junit
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion versions.minSdkVersion
     }
 
     compileOptions {
