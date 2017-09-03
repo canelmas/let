@@ -16,9 +16,6 @@
 
 package com.canelmas.let;
 
-/**
- * Created by can on 21/10/15.
- */
 public final class DeniedPermission {
 
     final String permission;

@@ -22,9 +22,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
-/**
- * Created by can on 31/08/15.
- */
 @Aspect
 public final class LetAspect {
 

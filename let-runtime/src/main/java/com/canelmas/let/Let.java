@@ -22,9 +22,6 @@ import android.support.v4.app.ActivityCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by can on 31/08/15.
- */
 public final class Let {
 
     /**

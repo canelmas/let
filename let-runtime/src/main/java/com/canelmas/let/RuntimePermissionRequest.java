@@ -29,9 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by can on 07/10/15.
- */
 public final class RuntimePermissionRequest {
 
     private static final AtomicInteger PERMISSIONS_REQUEST_CODE = new AtomicInteger();
@@ -39,7 +36,7 @@ public final class RuntimePermissionRequest {
     final Object source;
     final ProceedingJoinPoint joinPoint;
 
-    public RuntimePermissionRequest(ProceedingJoinPoint joinPoint, Object source) {
+    RuntimePermissionRequest(ProceedingJoinPoint joinPoint, Object source) {
         this.source = source;
         this.joinPoint = joinPoint;
     }
@@ -48,7 +45,7 @@ public final class RuntimePermissionRequest {
         proceed(true);
     }
 
-    protected Object proceed() {
+    Object proceed() {
         return proceed(false);
     }
 
