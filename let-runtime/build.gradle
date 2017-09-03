@@ -33,13 +33,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply from: '../gradle-mvn-push.gradle'
 
 dependencies {
-    compile deps.aspectjrt
-    compile project(':let-annotations')
+    implementation deps.aspectjrt
+    implementation project(':let-annotations')
 
-    compile deps.appCompatv7
-    compile deps.supportAnnotations
+    implementation deps.appCompatv7
+    implementation deps.supportAnnotations
 
-    testCompile deps.junit
+    testImplementation deps.junit
 }
 
 android {

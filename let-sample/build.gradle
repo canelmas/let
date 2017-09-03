@@ -16,11 +16,12 @@
 buildscript {
     repositories {
         jcenter()
-//        mavenLocal()
+        mavenLocal()
+        google()
 //        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
     dependencies {
-        classpath 'com.canelmas.let:let-plugin:0.1.11'
+        classpath 'com.canelmas.let:let-plugin:1.0.0-beta1'
     }
 }
 
@@ -29,7 +30,7 @@ apply plugin: 'let'
 
 repositories {
     jcenter()
-//    mavenLocal()
+    mavenLocal()
 //    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
@@ -59,12 +60,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile deps.appCompatv7
-    compile deps.supportDesign
+    implementation deps.appCompatv7
+    implementation deps.supportDesign
 
-    testCompile deps.junit
-
-//    compile 'com.android.tools:annotations:24.3.0'
+    testImplementation deps.junit
 }

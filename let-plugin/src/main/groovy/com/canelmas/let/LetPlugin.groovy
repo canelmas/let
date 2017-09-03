@@ -43,9 +43,9 @@ class LetPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            compile 'com.canelmas.let:let-runtime:0.1.11'
-            compile 'org.aspectj:aspectjrt:1.8.6'
-            compile 'com.canelmas.let:let-annotations:0.1.11'
+            implementation 'org.aspectj:aspectjrt:1.8.10'
+            implementation 'com.canelmas.let:let-runtime:1.0.0-beta1'
+            implementation 'com.canelmas.let:let-annotations:1.0.0-beta1'
         }
 
         variants.all { variant ->
