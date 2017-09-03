@@ -60,8 +60,6 @@ public final class RuntimePermissionRequest {
 
         final String[] permissionList = method.getAnnotation(AskPermission.class).value();
 
-        Logger.log(">>> " + signature.getName() + "() requires " + permissionList.length + " permission");
-
         //  Permissions to ask and to show rationales
         final List<String> permissionsToAsk = new ArrayList<>();
         final List<String> permissionsToExplain = new ArrayList<>();
@@ -70,20 +68,15 @@ public final class RuntimePermissionRequest {
 
         for (String permission : permissionList) {
 
-            Logger.log("\t" + permission);
-
             if (!isPermissionValid(permission)) {
                 throw new LetException("Permission name not valid!");
             } else {
 
                 final int permissionResult = ContextCompat.checkSelfPermission(letContext.getActivity(), permission);
 
-                Logger.log("\t\talreadyGranted=" + String.valueOf(permissionResult != -1));
-
                 if (permissionResult != PackageManager.PERMISSION_GRANTED) {
 
                     final boolean showRationale = ActivityCompat.shouldShowRequestPermissionRationale(letContext.getActivity(), permission);
-                    Logger.log("\t\tshowRationale=" + showRationale);
 
                     if (showRationale && !retry) {
                         permissionsToExplain.add(permission);
@@ -107,8 +100,6 @@ public final class RuntimePermissionRequest {
 
         if (!permissionsToExplain.isEmpty()) {
 
-            Logger.log("<<< Should show Rationale");
-
             if (null != listener) {
                 listener.onShowPermissionRationale(permissionsToExplain, new RuntimePermissionRequest(joinPoint, source));
             } else {
@@ -119,8 +110,6 @@ public final class RuntimePermissionRequest {
 
         } else if (!permissionsToAsk.isEmpty()) {
 
-            Logger.log("<<< Making permission request");
-
             final int requestCode = PERMISSIONS_REQUEST_CODE.getAndIncrement() & 0xff;
 
             DelayedTasks.add(new DelayedTasks.Task(permissionsToAsk, requestCode, joinPoint));
@@ -130,8 +119,6 @@ public final class RuntimePermissionRequest {
             return null;
 
         } else {
-
-            Logger.log("<<< Permissions granted");
 
             try {
                 return joinPoint.proceed();

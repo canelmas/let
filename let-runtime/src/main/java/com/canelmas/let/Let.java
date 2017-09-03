@@ -60,7 +60,6 @@ public final class Let {
 
                     deniedPermissions.add(new DeniedPermission(permissions[k], neverAskAgain));
 
-                    Logger.log("\t" + permissions[k] + " denied" + (neverAskAgain ? " with Never Ask Again checked." : ""));
                 }
 
             }
@@ -68,7 +67,6 @@ public final class Let {
             if (deniedPermissions.isEmpty()) {
 
                 try {
-                    Logger.log("<<< Required permissions granted");
                     delayedTask.execute();
                 } catch (Exception e) {
                     throw new LetException("Delayed Execution Failed!", e);
@@ -79,14 +77,11 @@ public final class Let {
                 RuntimePermissionListener listener = RuntimePermissionListener.class.isInstance(source) ? (RuntimePermissionListener) source : null;
 
                 if (null != listener) {
-                    Logger.log("<<< should handle denied permissions");
                     listener.onPermissionDenied(deniedPermissions);
                 }
 
             }
 
-        } else {
-            Logger.log("No delayed task to execute.");
         }
 
     }
