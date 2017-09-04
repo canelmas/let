@@ -16,6 +16,8 @@
 
 package com.canelmas.let;
 
+import android.annotation.SuppressLint;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.util.Collections;
@@ -24,11 +26,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-/**
- * Created by can on 27/10/15.
- */
-public final class DelayedTasks {
+final class DelayedTasks {
 
+    @SuppressLint("UseSparseArrays")
     private static Map<Integer, Task> tasks = Collections.synchronizedMap(new HashMap<Integer, Task>());
 
     static Task get(final int requestCode) {

@@ -4,9 +4,9 @@ Let
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Let-green.svg?style=true)](https://android-arsenal.com/details/1/2843) [![](https://img.shields.io/badge/AndroidWeekly-%23182-red.svg)](http://androidweekly.net/issues/issue-182)
 [![Join the chat at https://gitter.im/canelmas/let](https://badges.gitter.im/canelmas/let.svg)](https://gitter.im/canelmas/let?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Annotation based simple API flavoured with [AOP] (https://en.wikipedia.org/wiki/Aspect-oriented_programming) to handle new Android runtime permission model.
+Annotation based simple API flavoured with [AOP](https://en.wikipedia.org/wiki/Aspect-oriented_programming) to handle new Android runtime permission model.
 
-If you check [Google's Samples] (https://github.com/googlesamples/android-RuntimePermissions/blob/master/Application/src/main/java/com/example/android/system/runtimepermissions/MainActivity.java) 
+If you check [Google's Samples](https://github.com/googlesamples/android-RuntimePermissions/blob/master/Application/src/main/java/com/example/android/system/runtimepermissions/MainActivity.java)
 about the new permission model, you'll see a lot of boiler plate code for requesting, handling
 and retrying the request for required permissions.
 
@@ -106,7 +106,6 @@ buildscript {
     }
 }
 
-
 apply plugin: 'com.android.application'
 apply plugin: 'let'
 
@@ -115,27 +114,27 @@ repositories {
 }
 ```
 
-For SNAPSHOT version :
-
+For kotlin :
 ```groovy
 
 buildscript {
-    repositories {                    
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }        
+    repositories {
+        jcenter()
     }
 
-    dependencies {        
-        classpath 'com.canelmas.let:let-plugin:0.1.11-SNAPSHOT'
+    dependencies {
+        classpath 'com.canelmas.let:let-plugin:1.0.0-beta1'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'let'
 
-repositories {    
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+repositories {
+    jcenter()
 }
 ```
+
 
 Proguard
 ====

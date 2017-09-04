@@ -13,34 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 buildscript {
     repositories {
         jcenter()
-//        mavenLocal()
-//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        google()
     }
     dependencies {
-        classpath 'com.canelmas.let:let-plugin:0.1.11'
+        classpath 'com.canelmas.let:let-plugin:1.0.0-beta1'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'let'
 
-repositories {
-    jcenter()
-//    mavenLocal()
-//    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
 
     defaultConfig {
         applicationId "com.canelmas.let.sample"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -59,12 +53,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile deps.appCompatv7
-    compile deps.supportDesign
+    implementation deps.appCompatv7
+    implementation deps.supportDesign
 
-    testCompile 'junit:junit:4.12'
-
-    compile 'com.android.tools:annotations:24.3.0'
+    testImplementation deps.junit
 }

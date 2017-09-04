@@ -16,13 +16,11 @@
 
 package com.canelmas.let;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.support.v4.app.ActivityCompat;
 
-/**
- * Created by can on 30/10/15.
- */
 public final class LetContext {
 
     private final Object source;
@@ -31,7 +29,8 @@ public final class LetContext {
         this.source = source;
     }
 
-    public void requestPermissions(String[] permissions, int requestCode) {
+    @SuppressLint("NewApi")
+    void requestPermissions(String[] permissions, int requestCode) {
 
         if (source instanceof Activity) {
 
@@ -49,7 +48,7 @@ public final class LetContext {
 
     }
 
-    public Activity getActivity() {
+    Activity getActivity() {
 
         if (source instanceof Activity) {
 
