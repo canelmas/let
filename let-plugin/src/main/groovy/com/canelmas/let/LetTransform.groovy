@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2017 Can Elmas
+ * Copyright (C) 2018 Can Elmas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +18,7 @@ package com.canelmas.let
 
 import com.android.annotations.NonNull
 import com.android.build.api.transform.*
+import com.android.build.gradle.LibraryPlugin
 import com.google.common.base.Joiner
 import com.google.common.base.Strings
 import com.google.common.collect.Lists
@@ -32,9 +33,19 @@ import org.gradle.api.logging.Logger
 class LetTransform extends Transform {
 
     private Project project
+    private boolean isLibrary
+
+    private static final Set<QualifiedContent.Scope> LIBRARY_SCOPE = Sets.immutableEnumSet(
+            QualifiedContent.Scope.PROJECT)
+
+    private static final Set<QualifiedContent.Scope> APP_SCOPE = Sets.immutableEnumSet(
+            QualifiedContent.Scope.PROJECT,
+            QualifiedContent.Scope.SUB_PROJECTS,
+            QualifiedContent.Scope.EXTERNAL_LIBRARIES)
 
     LetTransform(Project project) {
         this.project = project
+        this.isLibrary = project.plugins.hasPlugin(LibraryPlugin)
     }
 
     @Override
@@ -129,8 +140,7 @@ class LetTransform extends Transform {
     @NonNull
     @Override
     Set<QualifiedContent.Scope> getScopes() {
-        return Sets.immutableEnumSet(QualifiedContent.Scope.PROJECT,
-                QualifiedContent.Scope.EXTERNAL_LIBRARIES)
+        return isLibrary ? LIBRARY_SCOPE : APP_SCOPE
     }
 
     @Override

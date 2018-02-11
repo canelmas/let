@@ -1,4 +1,4 @@
-include ':let-annotations'
+include ':let-annotations', ':let-sample-library'
 include ':let-plugin'
 include ':let-runtime'
 include ':let-sample'

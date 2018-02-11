@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Can Elmas
+ * Copyright (C) 2018 Can Elmas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-final class DelayedTasks {
+final class ScheduledTasks {
 
     @SuppressLint("UseSparseArrays")
     private static Map<Integer, Task> tasks = Collections.synchronizedMap(new HashMap<Integer, Task>());
@@ -67,7 +67,7 @@ final class DelayedTasks {
             } catch (Throwable t) {
                 throw new LetException("Future Task execution failed!", t);
             } finally {
-                DelayedTasks.remove(this);
+                ScheduledTasks.remove(this);
             }
         }
 

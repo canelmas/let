@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Can Elmas
+ * Copyright (C) 2018 Can Elmas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,15 @@ buildscript {
     repositories {
         jcenter()
         google()
+        mavenLocal()
     }
     dependencies {
-        classpath 'com.canelmas.let:let-plugin:1.0.0-beta1'
+        classpath 'com.canelmas.let:let-plugin:1.0.0-beta2'
     }
+}
+
+repositories {
+    mavenLocal()
 }
 
 apply plugin: 'com.android.application'
@@ -50,6 +55,7 @@ android {
         abortOnError false
     }
 
+    buildToolsVersion versions.buildToolsVersion
 }
 
 dependencies {

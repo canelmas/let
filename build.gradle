@@ -1,14 +1,14 @@
 buildscript {
 
     ext.versions = [
-            compileSdkVersion : 26,
-            buildToolsVersion : '26.0.1',
+            compileSdkVersion : 27,
+            buildToolsVersion : '27.0.3',
             minSdkVersion     : 14,
-            targetSdkVersion  : 26,
+            targetSdkVersion  : 27,
             supportLibrary    : '26.0.1',
             aspectjrt         : '1.8.9',
             aspectjtools      : '1.8.9',
-            androidPlugin     : '3.0.0-beta4',
+            androidPlugin     : '3.0.1',
             androidMavenPlugin: '1.2'
     ]
 

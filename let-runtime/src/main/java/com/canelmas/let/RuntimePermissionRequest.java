@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Can Elmas
+ * Copyright (C) 2018 Can Elmas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,7 +109,7 @@ public final class RuntimePermissionRequest {
 
             final int requestCode = PERMISSIONS_REQUEST_CODE.getAndIncrement() & 0xff;
 
-            DelayedTasks.add(new DelayedTasks.Task(permissionsToAsk, requestCode, joinPoint));
+            ScheduledTasks.add(new ScheduledTasks.Task(permissionsToAsk, requestCode, joinPoint));
 
             letContext.requestPermissions(permissionsToAsk.toArray(new String[]{}), requestCode);
 

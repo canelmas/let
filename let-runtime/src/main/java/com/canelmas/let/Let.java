@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Can Elmas
+ * Copyright (C) 2018 Can Elmas
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public final class Let {
      */
     public static void handle(Object source, int requestCode, String[] permissions, int[] grantResults) {
 
-        final DelayedTasks.Task delayedTask = DelayedTasks.get(requestCode);
+        final ScheduledTasks.Task delayedTask = ScheduledTasks.get(requestCode);
 
         if (null != delayedTask) {
 
